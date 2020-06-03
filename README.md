@@ -1,2 +1,4 @@
 # otus_cpp_09
-Bayn. Duplicate file search utility
+
+## bayan
+Duplicate file search utility
