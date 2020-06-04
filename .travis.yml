@@ -5,6 +5,7 @@ addons:
   apt:
     update: false
     packages:
+    - libboost-program-options-dev
     - libgtest-dev
     - doxygen
     - graphviz

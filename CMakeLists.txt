@@ -1,18 +1,23 @@
 cmake_minimum_required(VERSION 3.12.4)
 
-IF(DEFINED ENV{TRAVIS_BUILD_NUMBER})
+if(DEFINED ENV{TRAVIS_BUILD_NUMBER})
   set(VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-ELSE()  
+else()  
   set(VERSION 0.0.1)
-ENDIF()
+endif()
 
 project(bayan VERSION ${VERSION})
+
+find_package( Boost COMPONENTS program_options REQUIRED )
+include_directories( ${Boost_INCLUDE_DIR} )
 
 find_package(Threads)
 find_package(Doxygen COMPONENTS dot)
 
 set(EXEC_NAME ${CMAKE_PROJECT_NAME})
+set(LIB_NAME ${CMAKE_PROJECT_NAME}_lib)
 set(TEST_NAME gtest_${CMAKE_PROJECT_NAME})
+
 include_directories("inc/")
 set(SRC_PATH "src/")
 set(TEST_PATH "test/")
@@ -21,6 +26,28 @@ set(GTEST_SRCDIR "/usr/src/gtest/")
 add_executable(${EXEC_NAME} 
   ${SRC_PATH}/main.cpp
 )
+
+add_library(${LIB_NAME} 
+  ${SRC_PATH}/bayan.cpp
+)
+
+set_target_properties(${EXEC_NAME} ${LIB_NAME}  PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED ON
+)
+target_include_directories(${EXEC_NAME} 
+    PRIVATE "${CMAKE_BINARY_DIR}"
+)
+
+target_link_libraries(${LIB_NAME} 
+    ${Boost_LIBRARIES}
+)
+
+target_link_libraries(${EXEC_NAME} PRIVATE
+  ${LIB_NAME} 
+)
+
+
 
 if(EXISTS "${GTEST_SRCDIR}/CMakeLists.txt")
   add_subdirectory(${GTEST_SRCDIR}/ ${CMAKE_BINARY_DIR}/gtest/ EXCLUDE_FROM_ALL)

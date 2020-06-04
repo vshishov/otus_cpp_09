@@ -1,7 +1,9 @@
 #include <iostream>
 
-int main (int, char**)
+#include "bayan.h"
+
+int main(int argc, char** argv)
 {
-  std::cout << "bayan" << std::endl;
+  run(argc, argv);
   return 0;
 }
