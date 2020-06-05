@@ -1,3 +1,7 @@
 #pragma once
 
-int run(int argc, char** argv);
+namespace Otus {
+
+int run();
+
+} // Otus::
