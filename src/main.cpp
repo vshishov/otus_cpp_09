@@ -14,14 +14,14 @@ int main(int argc, char** argv)
   int nLevel, nSize, nBlock;
   po::options_description desc("General options");
   desc.add_options()
-    ("include,i", po::value< std::vector<std::string> >(),   "include path for scaning")
-    ("exclude,e", po::value< std::vector<std::string> >(),   "exclude path from scaning")
-    ("mask,m",    po::value<std::string>(),                  "masks for file names allowed for comparison")
-    ("level,l",   po::value<int>(&nLevel)->default_value(0), "level scaning")
-    ("size,s",    po::value<int>(&nSize)->default_value(1),  "minimum file size in bytes for scaning")
-    ("block,b",   po::value<int>(&nBlock)->default_value(1), "block size for reading file")
-    ("alg,a",     po::value<std::string>(),                  "hash algorithm: crc32, md5")
-    ("help,h",    "produce help message")  
+    ("include,i",    po::value< std::vector<std::string> >(),   "include path for scaning")
+    ("exclude,e",    po::value< std::vector<std::string> >(),   "exclude path from scaning")
+    ("mask,m",       po::value<std::string>(),                  "masks for file names allowed for comparison")
+    ("level,l",      po::value<int>(&nLevel)->default_value(0), "level scaning")
+    ("min-size,s",   po::value<int>(&nSize)->default_value(1),  "minimum file size in bytes for scaning")
+    ("block-size,b", po::value<int>(&nBlock)->default_value(1), "block size for reading file")
+    ("hash",         po::value<std::string>(),                  "hash algorithm: crc32, md5")
+    ("help,h",       "produce help message")  
   ;
 
   po::variables_map vm;
