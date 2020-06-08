@@ -8,7 +8,7 @@ endif()
 
 project(bayan VERSION ${VERSION})
 
-find_package( Boost COMPONENTS program_options REQUIRED )
+find_package( Boost COMPONENTS program_options filesystem REQUIRED )
 include_directories( ${Boost_INCLUDE_DIR} )
 
 find_package(Threads)
