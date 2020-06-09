@@ -8,7 +8,7 @@ endif()
 
 project(bayan VERSION ${VERSION})
 
-find_package( Boost COMPONENTS program_options filesystem REQUIRED )
+find_package( Boost COMPONENTS program_options filesystem regex REQUIRED )
 include_directories( ${Boost_INCLUDE_DIR} )
 
 find_package(Threads)
@@ -39,7 +39,7 @@ target_include_directories(${EXEC_NAME}
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(${LIB_NAME} 
+target_link_libraries(${LIB_NAME}
     ${Boost_LIBRARIES}
 )
 
@@ -47,19 +47,19 @@ target_link_libraries(${EXEC_NAME} PRIVATE
   ${LIB_NAME} 
 )
 
-
-
 if(EXISTS "${GTEST_SRCDIR}/CMakeLists.txt")
   add_subdirectory(${GTEST_SRCDIR}/ ${CMAKE_BINARY_DIR}/gtest/ EXCLUDE_FROM_ALL)
 
   add_executable(${TEST_NAME} 
-    ${TEST_PATH}/main_test.cpp    
+    ${TEST_PATH}/main_test.cpp  
+    ${TEST_PATH}/mask_test.cpp    
   )
 
   target_link_libraries(${TEST_NAME}
     PRIVATE
     gtest
     ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
   )
 
   enable_testing()

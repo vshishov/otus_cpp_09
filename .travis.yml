@@ -7,6 +7,7 @@ addons:
     packages:
     - libboost-program-options-dev
     - libboost-filesystem-dev
+    - libboost-regex-dev
     - libgtest-dev
     - doxygen
     - graphviz

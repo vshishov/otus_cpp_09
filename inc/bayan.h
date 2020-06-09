@@ -13,10 +13,10 @@ public:
   CBayan() = default;
   ~CBayan() = default;
 
-  void Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel);
+  void Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask);
 
 private:
-  static paths GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel);
+  static paths GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask);
 };
 
 } // Otus::

@@ -1,4 +1,5 @@
 #include "bayan.h"
+#include "mask.h"
 
 #include <iostream>
 #include <boost/filesystem.hpp>
@@ -7,18 +8,19 @@ namespace Otus {
 
 namespace bfs = boost::filesystem;
 
-void CBayan::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel)
+void CBayan::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask)
 {
-  paths filenames = GetListOfFiles(a_Includes, a_Excludes, a_nLevel);
+  paths filenames = GetListOfFiles(a_Includes, a_Excludes, a_nLevel, a_strMask);
 
   for (auto path : filenames) {
     std::cout << path << std::endl;
   }
 }
 
-paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel)
+paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask)
 { 
 	paths listOfFiles;
+  Mask mask(a_strMask);
 	try {
     for (auto& incPath : a_Includes) {
       if (bfs::exists(incPath) && bfs::is_directory(incPath)) {
@@ -33,7 +35,10 @@ paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, i
             iter.no_push();
           }
           else {
-            if (bfs::is_regular_file(iter->path())) {
+            if (bfs::is_regular_file(iter->path()) && 
+                mask.Valid(iter->path().filename().string())
+              ) 
+            {
               listOfFiles.push_back(iter->path().string());
             }
           }
