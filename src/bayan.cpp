@@ -8,16 +8,18 @@ namespace Otus {
 
 namespace bfs = boost::filesystem;
 
-void CBayan::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask)
+void CBayan::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
 {
-  paths filenames = GetListOfFiles(a_Includes, a_Excludes, a_nLevel, a_strMask);
+  paths filenames = GetListOfFiles(a_Includes, a_Excludes, a_nLevel, a_strMask, a_nMinSize);
 
   for (auto path : filenames) {
     std::cout << path << std::endl;
   }
+
+
 }
 
-paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask)
+paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
 { 
 	paths listOfFiles;
   Mask mask(a_strMask);
@@ -36,6 +38,7 @@ paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, i
           }
           else {
             if (bfs::is_regular_file(iter->path()) && 
+                bfs::file_size(iter->path()) >= a_nMinSize &&
                 mask.Valid(iter->path().filename().string())
               ) 
             {
