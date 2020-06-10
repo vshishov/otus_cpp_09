@@ -29,6 +29,7 @@ add_executable(${EXEC_NAME}
 
 add_library(${LIB_NAME} 
   ${SRC_PATH}/bayan.cpp
+  ${SRC_PATH}/options.cpp
 )
 
 set_target_properties(${EXEC_NAME} ${LIB_NAME}  PROPERTIES
