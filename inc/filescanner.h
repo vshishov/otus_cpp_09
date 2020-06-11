@@ -7,11 +7,11 @@ namespace Otus {
 
 using paths = std::vector<std::string>;
 
-class CBayan
+class FileScanner
 {
 public:
-  CBayan() = default;
-  ~CBayan() = default;
+  FileScanner() = default;
+  ~FileScanner() = default;
 
   void Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize);
 

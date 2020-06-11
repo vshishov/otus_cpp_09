@@ -1,4 +1,4 @@
-#include "bayan.h"
+#include "filescanner.h"
 #include "options.h"
 
 #include <iostream>
@@ -15,10 +15,10 @@ int main(int argc, char** argv)
   Otus::OptionsParser optionsParser;
   auto options = optionsParser.GetOptions(argc, argv);
   if (!options) {
-    std::cout << "error" << std::endl;
     return 0;
   }
 
+  Otus::FileScanner fileScanner;
   // Otus::CBayan bayan;
   // bayan.Exec(vInputPaths, vExcludePaths, nLevel, strMask, nMinFileSize);
   return 0;

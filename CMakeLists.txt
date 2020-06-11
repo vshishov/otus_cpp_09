@@ -28,7 +28,7 @@ add_executable(${EXEC_NAME}
 )
 
 add_library(${LIB_NAME} 
-  ${SRC_PATH}/bayan.cpp
+  ${SRC_PATH}/filescanner.cpp
   ${SRC_PATH}/options.cpp
 )
 

@@ -1,4 +1,4 @@
-#include "bayan.h"
+#include "filescanner.h"
 #include "mask.h"
 
 #include <iostream>
@@ -8,7 +8,7 @@ namespace Otus {
 
 namespace bfs = boost::filesystem;
 
-void CBayan::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
+void FileScanner::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
 {
   paths filenames = GetListOfFiles(a_Includes, a_Excludes, a_nLevel, a_strMask, a_nMinSize);
 
@@ -19,7 +19,7 @@ void CBayan::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel
 
 }
 
-paths CBayan::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
+paths FileScanner::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
 { 
 	paths listOfFiles;
   Mask mask(a_strMask);
