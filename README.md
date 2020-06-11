@@ -21,7 +21,9 @@ Duplicate file search utility
 
 ### Examples: 
 **long options:**
+
 `bayan --include /home --exclude /~/temp --level=3 --min-size=256 --masks *.cpp *.txt --block-size=1024 --algorithm=crc32`
 
 **short options:**
-`bayan -i /home -e/~/temp -l 3 -s256 -m*.cpp *.txt -b1024 -acrc32`
+
+`bayan -i /home -e /~/temp -l 3 -s 256 -m*.cpp *.txt -b 1024 -a crc32`
