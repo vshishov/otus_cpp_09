@@ -18,7 +18,8 @@ int main(int argc, char** argv)
     return 0;
   }
 
-  Otus::FileScanner fileScanner;
+  Otus::FileScanner fileScanner(options.get().excludePaths, options.get().levelScannig, options.get().masks, options.get().minFileSize);
+  fileScanner.Scan(options.get().includePaths);
   // Otus::CBayan bayan;
   // bayan.Exec(vInputPaths, vExcludePaths, nLevel, strMask, nMinFileSize);
   return 0;

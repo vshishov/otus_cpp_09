@@ -8,33 +8,26 @@ namespace Otus {
 
 namespace bfs = boost::filesystem;
 
-void FileScanner::Exec(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
+FileScanner::FileScanner(const Paths& a_Excludes, boost::optional<std::size_t>& a_szLevel, std::vector<std::string> a_Masks, boost::optional<std::size_t>& a_szMinSize)
 {
-  paths filenames = GetListOfFiles(a_Includes, a_Excludes, a_nLevel, a_strMask, a_nMinSize);
-
-  for (auto path : filenames) {
-    std::cout << path << std::endl;
-  }
-
-
+  m_DirFilter = new LevelDirFilter(a_szLevel.get());
+  m_DirFilter->SetNext(new ExcludeDirFilter(a_Excludes));
 }
 
-paths FileScanner::GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize)
-{ 
-	paths listOfFiles;
-  Mask mask(a_strMask);
+void FileScanner::Scan(const Paths& a_Includes)
+{
+  Paths listOfFiles;
+  Mask mask("*.*");
+  long a_nMinSize = 0;
 	try {
     for (auto& incPath : a_Includes) {
       if (bfs::exists(incPath) && bfs::is_directory(incPath)) {
         bfs::recursive_directory_iterator iter(incPath), end;
         while (iter != end) {
-          if (iter.level() > a_nLevel || 
-              ( bfs::is_directory(iter->path()) &&
-                (std::find(a_Excludes.begin(), a_Excludes.end(), iter->path().string()) != a_Excludes.end())
-              ) 
-            )
+          ScanPath scanPath = std::make_pair(iter->path(), iter.level() );
+          if (bfs::is_directory(iter->path()) && !m_DirFilter->IsValid(scanPath))
           {
-            iter.no_push();
+            iter.no_push();            
           }
           else {
             if (bfs::is_regular_file(iter->path()) && 
@@ -58,7 +51,12 @@ paths FileScanner::GetListOfFiles(const paths& a_Includes, const paths& a_Exclud
 	catch (const std::system_error& ex) {
 		std::cerr << "Error: " << ex.what();
 	}
-	return listOfFiles;
+  
+  for (auto path : listOfFiles) {
+    std::cout << path << std::endl;
+  }
+
+
 }
 
 } // Otus::

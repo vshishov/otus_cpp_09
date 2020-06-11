@@ -37,4 +37,4 @@ private:
   boost::smatch m_what;
 };
 
-} //Otus::
+} // Otus::
