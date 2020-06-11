@@ -8,7 +8,7 @@
 Duplicate file search utility
 
 ### Options:
-```bash
+```
   -i [ --include    ] Include paths for scaning (required)
   -e [ --exclude    ] Exclude paths from scaning (optional, by default is not set)
   -l [ --level      ] Scan nesting level (optional, by default is 0 - without nested)
