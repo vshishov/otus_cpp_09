@@ -19,8 +19,15 @@ int main(int argc, char** argv)
   }
 
   Otus::FileScanner fileScanner(options.get().excludePaths, options.get().levelScannig, options.get().masks, options.get().minFileSize);
-  fileScanner.Scan(options.get().includePaths);
-  // Otus::CBayan bayan;
-  // bayan.Exec(vInputPaths, vExcludePaths, nLevel, strMask, nMinFileSize);
+  auto groupPath = fileScanner.Scan(options.get().includePaths);
+
+  for (auto& group : groupPath) {
+    std::cout << group.first << ' ' ;
+    for (auto& path : group.second) {
+      std::cout << path << ' ';
+    }
+    std::cout << std::endl;
+  }
+
   return 0;
 }

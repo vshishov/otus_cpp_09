@@ -19,14 +19,6 @@ PathGroupedBySize FileScanner::Scan(const Paths& a_Includes)
   PathGroupedBySize groupPath = FindPath(a_Includes);
   DeleteUniqPath(groupPath);
 
-  for (auto& group : groupPath) {
-    std::cout << group.first << ' ' ;
-    for (auto& path : group.second) {
-      std::cout << path << ' ';
-    }
-    std::cout << std::endl;
-  }
-
   return groupPath;
 }
 
@@ -102,7 +94,7 @@ DirFilter* FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel,
 
 FileFilter* FileScanner::CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks)
 {
-  std::size_t szMinSize = 0;
+  std::size_t szMinSize = 1;
   if (a_szMinSize) {
     szMinSize = a_szMinSize.get();
   }
