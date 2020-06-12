@@ -1,6 +1,8 @@
 #pragma once
 
+#include "mask.h"
 #include "common.h"
+
 
 namespace Otus
 {
@@ -86,6 +88,90 @@ public:
 
 private:
   Paths m_excludePaths;
+};
+
+
+
+class FileFilter
+{
+public:
+  virtual FileFilter* SetNext(FileFilter* a_dirFilter) = 0;
+  virtual bool IsValid(const Path& a_path) = 0;
+};
+
+class BaseFileFilter : public FileFilter
+{
+public:
+  BaseFileFilter()
+    : nextFileFilter(nullptr)
+  { }
+
+  FileFilter* SetNext(FileFilter* a_dirFilter) override
+  {
+    this->nextFileFilter = a_dirFilter;
+    return a_dirFilter;
+  }
+
+  bool IsValid(const Path& a_path) override
+  {
+    if (this->nextFileFilter) {
+      return this->nextFileFilter->IsValid(a_path);
+    }
+
+    return true;
+  }
+
+private:
+  FileFilter* nextFileFilter;
+};
+
+class SizeDirFilter : public BaseFileFilter
+{
+public:
+  SizeDirFilter(std::size_t a_szSize)
+    : BaseFileFilter()
+    , m_szSize(a_szSize)
+  { }
+
+  bool IsValid(const Path& a_path) override
+  {
+    if (bfs::file_size(a_path) < m_szSize) {;
+      return false;    
+    }
+    return BaseFileFilter::IsValid(a_path);
+  }
+
+private:
+  std::size_t m_szSize;
+};
+
+class MasksFileFilter : public BaseFileFilter
+{
+public:
+  MasksFileFilter(const std::vector<std::string>& a_vstrMasks)
+    : BaseFileFilter()
+  { 
+    for (auto& mask : a_vstrMasks) {
+      m_masks.emplace_back(Mask(mask));
+    }
+  }
+
+  bool IsValid(const Path& a_path) override
+  {
+    if (!m_masks.empty()) {
+      auto filename = a_path.filename().string();
+      return std::any_of(m_masks.begin(), m_masks.end(), 
+        [filename](Mask& mask) {
+          return mask.Valid(filename);
+        } 
+      );
+    }
+    
+    return BaseFileFilter::IsValid(a_path);
+  }
+
+private:
+  std::vector<Mask> m_masks;
 };
 
 } // Otus::
