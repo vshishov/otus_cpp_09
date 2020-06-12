@@ -19,8 +19,12 @@ public:
   void Scan(const Paths& a_Includes);
 
 private:
-  // static paths GetListOfFiles(const paths& a_Includes, const paths& a_Excludes, int a_nLevel, std::string a_strMask, int a_nMinSize);
+  static DirFilter* CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes);
+  static FileFilter* CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks);
+
+private:  
   DirFilter* m_DirFilter;
+  FileFilter* m_FileFilter;
 };
 
 } // Otus::

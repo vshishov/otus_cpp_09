@@ -10,8 +10,8 @@ namespace bfs = boost::filesystem;
 
 FileScanner::FileScanner(const Paths& a_Excludes, boost::optional<std::size_t>& a_szLevel, std::vector<std::string> a_Masks, boost::optional<std::size_t>& a_szMinSize)
 {
-  m_DirFilter = new LevelDirFilter(a_szLevel.get());
-  m_DirFilter->SetNext(new ExcludeDirFilter(a_Excludes));
+  m_DirFilter = CreateDirFilter(a_szLevel, a_Excludes);
+  m_FileFilter = CreateFileFilter(a_szMinSize, a_Masks);
 }
 
 void FileScanner::Scan(const Paths& a_Includes)
@@ -57,6 +57,30 @@ void FileScanner::Scan(const Paths& a_Includes)
   }
 
 
+}
+
+DirFilter* FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
+{
+  std::size_t szLevel = 0;
+  if (a_szLevel) {
+    szLevel = a_szLevel.get();
+  }
+  auto levelFilter = new LevelDirFilter(szLevel);
+  auto excludeFilter = new ExcludeDirFilter(a_Excludes);
+  levelFilter->SetNext(excludeFilter);
+  return levelFilter;
+}
+
+FileFilter* FileScanner::CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks)
+{
+  std::size_t szMinSize = 0;
+  if (a_szMinSize) {
+    szMinSize = a_szMinSize.get();
+  }
+  auto sizeFilter = new SizeFileFilter(szMinSize);
+  auto masksFilter = new MasksFileFilter(a_strMasks);
+  sizeFilter->SetNext(masksFilter);
+  return sizeFilter;
 }
 
 } // Otus::
