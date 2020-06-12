@@ -125,10 +125,10 @@ private:
   FileFilter* nextFileFilter;
 };
 
-class SizeDirFilter : public BaseFileFilter
+class SizeFileFilter : public BaseFileFilter
 {
 public:
-  SizeDirFilter(std::size_t a_szSize)
+  SizeFileFilter(std::size_t a_szSize)
     : BaseFileFilter()
     , m_szSize(a_szSize)
   { }
