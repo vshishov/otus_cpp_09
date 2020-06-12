@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.12.4)
 
 if(DEFINED ENV{TRAVIS_BUILD_NUMBER})
-  set(VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+    set(VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else()  
-  set(VERSION 0.0.1)
+    set(VERSION 0.0.1)
 endif()
 
 project(bayan VERSION ${VERSION})
@@ -28,20 +28,21 @@ add_executable(${EXEC_NAME}
 )
 
 add_library(${LIB_NAME} 
+  ${SRC_PATH}/options.cpp  
   ${SRC_PATH}/filescanner.cpp
-  ${SRC_PATH}/options.cpp
+  ${SRC_PATH}/duplicatescanner.cpp 
 )
 
 set_target_properties(${EXEC_NAME} ${LIB_NAME}  PROPERTIES
-    CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED ON
+  CXX_STANDARD 11
+  CXX_STANDARD_REQUIRED ON
 )
 target_include_directories(${EXEC_NAME} 
-    PRIVATE "${CMAKE_BINARY_DIR}"
+  PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
 target_link_libraries(${LIB_NAME}
-    ${Boost_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 target_link_libraries(${EXEC_NAME} PRIVATE
@@ -69,7 +70,8 @@ else()
   message(
     WARNING
     "Test suite will not be launched because GTest sources is not found at "
-    "${GTEST_SRCDIR}.")
+    "${GTEST_SRCDIR}."
+  )
 endif()
 
 if(DOXYGEN_FOUND)
@@ -85,16 +87,18 @@ if(DOXYGEN_FOUND)
 endif()
 
 set_target_properties(${EXEC_NAME} ${TEST_NAME} PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
+  CXX_STANDARD 17
+  CXX_STANDARD_REQUIRED ON
 )
 
 if (MSVC)
-    target_compile_options(${EXEC_NAME} PRIVATE /W4)
-    target_compile_options(${TEST_NAME} PRIVATE /W4)
+  target_compile_options(${EXEC_NAME} PRIVATE /W4)
+  target_compile_options(${LIB_NAME} PRIVATE /W4)
+  target_compile_options(${TEST_NAME} PRIVATE /W4)
 else ()
-    target_compile_options(${EXEC_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
-    target_compile_options(${TEST_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
+  target_compile_options(${EXEC_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
+  target_compile_options(${LIB_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
+  target_compile_options(${TEST_NAME} PRIVATE -Wall -Wextra -pedantic -Werror)
 endif()
 
 install(TARGETS ${EXEC_NAME} RUNTIME DESTINATION bin)
