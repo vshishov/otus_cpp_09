@@ -13,7 +13,7 @@ using Path = bfs::path;
 using Paths = std::vector<bfs::path>; 
 using ScanPath = std::pair<bfs::path, std::size_t>; 
 
-using UniquePath = std::set<Path>;
-using PathGroupedBySize = std::unordered_map< std::size_t, UniquePath >;
+using UniquePaths = std::set<Path>;
+using PathGroupedBySize = std::unordered_map< std::size_t, UniquePaths >;
 
 } // Otus::
