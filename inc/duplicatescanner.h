@@ -17,12 +17,11 @@ class Duplicatescanner
 public:
   Duplicatescanner(boost::optional<std::size_t>& a_szBlockSize, boost::optional<std::string>& a_strHashAlg);
 
-  std::vector<Paths> Scan(PathGroupedBySize a_groupPath);
+  PathGroupedByDup Scan(PathGroupedBySize a_groupPath);
 
 private:
-  Paths CheckPaths(const UniquePaths& a_paths);
-  Paths CheckPaths2(const UniquePaths& a_paths);
-  std::vector<Paths>  CheckPaths3(const UniquePaths& a_paths);
+  PathGroupedForRead CheckPaths(const UniquePaths& a_paths);
+  PathGroupedByDup FormGropByDuplicates(PathGroupedForRead& a_paths);
 
   static HashFunc_t CreateHashFunc(boost::optional<std::string>& a_strHashAlg);
 

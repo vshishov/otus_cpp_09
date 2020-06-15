@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vshishov/otus_cpp/otus_cpp_09/src/duplicatescanner.cpp" "/home/vshishov/otus_cpp/otus_cpp_09/build/CMakeFiles/bayan_lib.dir/src/duplicatescanner.cpp.o"
-  "/home/vshishov/otus_cpp/otus_cpp_09/src/filescanner.cpp" "/home/vshishov/otus_cpp/otus_cpp_09/build/CMakeFiles/bayan_lib.dir/src/filescanner.cpp.o"
-  "/home/vshishov/otus_cpp/otus_cpp_09/src/options.cpp" "/home/vshishov/otus_cpp/otus_cpp_09/build/CMakeFiles/bayan_lib.dir/src/options.cpp.o"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/src/duplicatescanner.cpp" "/home/bob/cpp_otus/projects/otus_cpp_09/build/CMakeFiles/bayan_lib.dir/src/duplicatescanner.cpp.o"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/src/filescanner.cpp" "/home/bob/cpp_otus/projects/otus_cpp_09/build/CMakeFiles/bayan_lib.dir/src/filescanner.cpp.o"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/src/options.cpp" "/home/bob/cpp_otus/projects/otus_cpp_09/build/CMakeFiles/bayan_lib.dir/src/options.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

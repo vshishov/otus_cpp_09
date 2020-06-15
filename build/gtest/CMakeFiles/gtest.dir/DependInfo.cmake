@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/usr/src/gtest/src/gtest-all.cc" "/home/vshishov/otus_cpp/otus_cpp_09/build/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
+  "/usr/src/gtest/src/gtest-all.cc" "/home/bob/cpp_otus/projects/otus_cpp_09/build/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/vshishov/otus_cpp/otus_cpp_09/inc"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/inc"
   "/usr/src/gtest/include"
   "/usr/src/gtest"
   )

@@ -194,7 +194,7 @@ WARN_FORMAT            = "$file:$line: $text"
 
 WARN_LOGFILE           =
 
-INPUT                  = /home/vshishov/otus_cpp/otus_cpp_09/inc/
+INPUT                  = /home/bob/cpp_otus/projects/otus_cpp_09/inc/
 
 INPUT_ENCODING         = UTF-8
 

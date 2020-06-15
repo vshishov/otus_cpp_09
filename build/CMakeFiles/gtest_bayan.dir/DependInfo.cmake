@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vshishov/otus_cpp/otus_cpp_09/test/main_test.cpp" "/home/vshishov/otus_cpp/otus_cpp_09/build/CMakeFiles/gtest_bayan.dir/test/main_test.cpp.o"
-  "/home/vshishov/otus_cpp/otus_cpp_09/test/mask_test.cpp" "/home/vshishov/otus_cpp/otus_cpp_09/build/CMakeFiles/gtest_bayan.dir/test/mask_test.cpp.o"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/test/main_test.cpp" "/home/bob/cpp_otus/projects/otus_cpp_09/build/CMakeFiles/gtest_bayan.dir/test/main_test.cpp.o"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/test/mask_test.cpp" "/home/bob/cpp_otus/projects/otus_cpp_09/build/CMakeFiles/gtest_bayan.dir/test/mask_test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,7 +17,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/vshishov/otus_cpp/otus_cpp_09/build/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "/home/bob/cpp_otus/projects/otus_cpp_09/build/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
