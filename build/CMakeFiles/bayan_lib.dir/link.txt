@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbayan_lib.a  CMakeFiles/bayan_lib.dir/src/options.cpp.o CMakeFiles/bayan_lib.dir/src/filescanner.cpp.o CMakeFiles/bayan_lib.dir/src/duplicatescanner.cpp.o
+/usr/bin/ranlib libbayan_lib.a

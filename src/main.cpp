@@ -22,14 +22,6 @@ int main(int argc, char** argv)
   Otus::FileScanner fileScanner(options.get().excludePaths, options.get().levelScannig, options.get().masks, options.get().minFileSize);
   auto groupPath = fileScanner.Scan(options.get().includePaths);
 
-  for (auto& group : groupPath) {
-    std::cout << group.first << ' ';
-    for (auto& path : group.second) {
-      std::cout << path << ' ';
-    }
-    std::cout << std::endl;
-  }
-
   Otus::Duplicatescanner dupScanner(options.get().blockSize, options.get().hash);
   auto duplicates = dupScanner.Scan(groupPath);
 

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/bayan.dir/src/main.cpp.o  -o bayan libbayan_lib.a /usr/lib/x86_64-linux-gnu/libboost_program_options.so /usr/lib/x86_64-linux-gnu/libboost_filesystem.so /usr/lib/x86_64-linux-gnu/libboost_regex.so /usr/lib/x86_64-linux-gnu/libboost_system.so 

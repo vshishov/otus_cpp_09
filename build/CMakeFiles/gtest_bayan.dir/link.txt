@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/gtest_bayan.dir/test/main_test.cpp.o CMakeFiles/gtest_bayan.dir/test/mask_test.cpp.o  -o gtest_bayan gtest/libgtest.a -lpthread /usr/lib/x86_64-linux-gnu/libboost_program_options.so /usr/lib/x86_64-linux-gnu/libboost_filesystem.so /usr/lib/x86_64-linux-gnu/libboost_regex.so /usr/lib/x86_64-linux-gnu/libboost_system.so 

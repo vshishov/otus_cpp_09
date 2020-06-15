@@ -43,10 +43,6 @@ PathGroupedBySize FileScanner::FindPath(const Paths& a_Includes)
 
               auto& uniquepaths = resultPaths[szSize];
               uniquepaths.insert(path);
-              // auto find_it = resultPaths.find(szSize);
-              // if (find_it == resultPaths.end() ) {
-              //   resultPaths.
-              // }
             }
           }
   
