@@ -17,13 +17,13 @@ OptionsParser::OptionsParser()
   : m_Description("Options")
 {
   m_Description.add_options()
-    ("include,i",     bpo::value<std::vector<bfs::path>>(), "Include paths for scaning")
-    ("exclude,e",     bpo::value<std::vector<bfs::path>>(), "Exclude paths from scaning")
-    ("level,l",       bpo::value<long>(),                   "Scan nesting level, 0 - without nested")
-    ("min-size,s",    bpo::value<long>(),                   "Minimum file size in bytes for scaning")
-    ("masks,m",       bpo::value<std::vector<std::string>>(),            "Masks for file names allowed for comparison")
-    ("block-size,b",  bpo::value<long>(),                   "Block size in bytes for reading file")
-    ("algorithm,a",   bpo::value<std::string>(),            "Hash algorithm: crc32 or md5")
+    ("include,i",     bpo::value<std::vector<bfs::path>>(),   "Include paths for scaning")
+    ("exclude,e",     bpo::value<std::vector<bfs::path>>(),   "Exclude paths from scaning")
+    ("level,l",       bpo::value<long>(),                     "Scan nesting level, 0 - without nested")
+    ("min-size,s",    bpo::value<long>(),                     "Minimum file size in bytes for scaning")
+    ("masks,m",       bpo::value<std::vector<std::string>>(), "Masks for file names allowed for comparison")
+    ("block-size,b",  bpo::value<long>(),                     "Block size in bytes for reading file")
+    ("algorithm,a",   bpo::value<std::string>(),              "Hash algorithm: crc32 or md5")
     ("help,h",        "Show help")  
   ;
 }
@@ -92,9 +92,10 @@ OptionsParser::OptionsResult OptionsParser::GetOptions(int argc, char** argv)
 
     if (m_Variables.count("algorithm")) {
       std::string strHash = m_Variables["algorithm"].as<std::string>();
-      if (strHash != "crc32" && strHash != "md5") {
-        throw InvalidOption("The hash algorithm is invalid");
+      if (strHash != "crc32" && strHash != "crc16") {
+        throw InvalidOption("The hash algorithm '" + strHash + "' not supported");
       }
+      options.hash = strHash;
     }
 
     return options;
