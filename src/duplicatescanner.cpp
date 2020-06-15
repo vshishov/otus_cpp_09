@@ -40,8 +40,7 @@ PathGroupedForRead Duplicatescanner::CheckPaths(const UniquePaths& a_paths)
 
   for (const Path& path : a_paths) {
     std::string strPath = path.string();
-    // std::fstream read_stream(strPath, std::fstream::in);
-    std::ifstream read_stream(strPath, std::ios::binary|std::ios::ate);
+    std::fstream read_stream(strPath, std::fstream::in);
     hashes[strPath] = std::make_pair(std::move(read_stream), 0);
   }
 
