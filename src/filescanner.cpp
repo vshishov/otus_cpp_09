@@ -77,7 +77,6 @@ void FileScanner::DeleteUniqPath(PathGroupedBySize& a_groupPath)
 }
 
 std::shared_ptr<DirFilter> FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
-// DirFilter* FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
 {
   std::size_t szLevel = 0;
   if (a_szLevel) {
