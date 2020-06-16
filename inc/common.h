@@ -20,7 +20,8 @@ using ScanPath = std::pair<bfs::path, std::size_t>;
 using UniquePaths = std::set<Path>;
 using PathGroupedBySize = std::unordered_map< std::size_t, UniquePaths >;
 
-using PathGroupedForRead = std::unordered_map<std::string, std::pair<std::fstream, std::size_t>> ;
+using PathDataRead = std::pair<std::fstream, std::size_t>;
+using PathGroupedForRead = std::unordered_map<std::string, PathDataRead> ;
 using PathGroupedByDup = std::list<Paths>;
 
 } // Otus::
