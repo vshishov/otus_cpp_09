@@ -1,11 +1,12 @@
 #pragma once
 
+#include "common.h"
+
 #include <boost/optional.hpp>
 #include <boost/function.hpp>
 #include <string>
 #include <memory>
 
-#include "common.h"
 
 namespace Otus 
 {
