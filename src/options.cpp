@@ -23,7 +23,7 @@ OptionsParser::OptionsParser()
     ("min-size,s",    bpo::value<long>(),                     "Minimum file size in bytes for scaning")
     ("masks,m",       bpo::value<std::vector<std::string>>(), "Masks for file names allowed for comparison")
     ("block-size,b",  bpo::value<long>(),                     "Block size in bytes for reading file")
-    ("algorithm,a",   bpo::value<std::string>(),              "Hash algorithm: crc32 or md5")
+    ("algorithm,a",   bpo::value<std::string>(),              "Hash algorithm: crc16 or crc32")
     ("help,h",        "Show help")  
   ;
 }
