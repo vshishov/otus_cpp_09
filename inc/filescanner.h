@@ -19,15 +19,15 @@ public:
   PathGroupedBySize Scan(const Paths& a_Includes);
 
 private:
-  static DirFilter* CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes);
-  static FileFilter* CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks);
+  static std::shared_ptr<DirFilter> CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes);
+  static std::shared_ptr<FileFilter> CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks);
 
   PathGroupedBySize FindPath(const Paths& a_Includes);
   void DeleteUniqPath(PathGroupedBySize& a_groupPath);
 
 private:  
-  DirFilter* m_DirFilter;
-  FileFilter* m_FileFilter;
+  std::shared_ptr<DirFilter> m_DirFilter;
+  std::shared_ptr<FileFilter> m_FileFilter;
 };
 
 } // Otus::

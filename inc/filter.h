@@ -3,6 +3,8 @@
 #include "mask.h"
 #include "common.h"
 
+#include <memory>
+
 
 namespace Otus
 {
@@ -10,7 +12,7 @@ namespace Otus
 class DirFilter
 {
 public:
-  virtual DirFilter* SetNext(DirFilter* a_dirFilter) = 0;
+  virtual std::weak_ptr<DirFilter> SetNext(std::shared_ptr<DirFilter> a_dirFilter) = 0;
   virtual bool IsValid(const ScanPath& a_path) = 0;
 };
 
@@ -18,10 +20,9 @@ class BaseDirFilter : public DirFilter
 {
 public:
   BaseDirFilter()
-    : nextDirFilter(nullptr)
   { }
 
-  DirFilter* SetNext(DirFilter* a_dirFilter) override
+  std::weak_ptr<DirFilter> SetNext(std::shared_ptr<DirFilter> a_dirFilter) override
   {
     this->nextDirFilter = a_dirFilter;
     return a_dirFilter;
@@ -29,15 +30,15 @@ public:
 
   bool IsValid(const ScanPath& a_path) override
   {
-    if (this->nextDirFilter) {
-      return this->nextDirFilter->IsValid(a_path);
+    if ( !nextDirFilter.expired() ) {
+      return nextDirFilter.lock()->IsValid(a_path);
     }
 
     return true;
   }
 
 private:
-  DirFilter* nextDirFilter;
+  std::weak_ptr<DirFilter> nextDirFilter;
 };
 
 class LevelDirFilter : public BaseDirFilter
@@ -95,7 +96,7 @@ private:
 class FileFilter
 {
 public:
-  virtual FileFilter* SetNext(FileFilter* a_dirFilter) = 0;
+  virtual std::weak_ptr<FileFilter> SetNext(std::shared_ptr<FileFilter> a_dirFilter) = 0;
   virtual bool IsValid(const Path& a_path) = 0;
 };
 
@@ -103,26 +104,25 @@ class BaseFileFilter : public FileFilter
 {
 public:
   BaseFileFilter()
-    : nextFileFilter(nullptr)
   { }
 
-  FileFilter* SetNext(FileFilter* a_dirFilter) override
+  std::weak_ptr<FileFilter> SetNext(std::shared_ptr<FileFilter> a_dirFilter) override
   {
     this->nextFileFilter = a_dirFilter;
-    return a_dirFilter;
+    return nextFileFilter;
   }
 
   bool IsValid(const Path& a_path) override
   {
-    if (this->nextFileFilter) {
-      return this->nextFileFilter->IsValid(a_path);
+    if ( !nextFileFilter.expired() ) {
+      return nextFileFilter.lock()->IsValid(a_path);
     }
 
     return true;
   }
 
 private:
-  FileFilter* nextFileFilter;
+  std::weak_ptr<FileFilter> nextFileFilter;
 };
 
 class SizeFileFilter : public BaseFileFilter

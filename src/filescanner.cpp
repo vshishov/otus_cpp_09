@@ -76,26 +76,26 @@ void FileScanner::DeleteUniqPath(PathGroupedBySize& a_groupPath)
   }
 }
 
-DirFilter* FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
+std::shared_ptr<DirFilter> FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
 {
   std::size_t szLevel = 0;
   if (a_szLevel) {
     szLevel = a_szLevel.get();
   }
-  auto levelFilter = new LevelDirFilter(szLevel);
-  auto excludeFilter = new ExcludeDirFilter(a_Excludes);
+  auto levelFilter = std::make_shared<LevelDirFilter>(szLevel);
+  auto excludeFilter = std::make_shared<ExcludeDirFilter>(a_Excludes);
   levelFilter->SetNext(excludeFilter);
   return levelFilter;
 }
 
-FileFilter* FileScanner::CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks)
+std::shared_ptr<FileFilter> FileScanner::CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks)
 {
   std::size_t szMinSize = 1;
   if (a_szMinSize) {
     szMinSize = a_szMinSize.get();
   }
-  auto sizeFilter = new SizeFileFilter(szMinSize);
-  auto masksFilter = new MasksFileFilter(a_strMasks);
+  auto sizeFilter = std::make_shared<SizeFileFilter>(szMinSize);
+  auto masksFilter = std::make_shared<MasksFileFilter>(a_strMasks);
   sizeFilter->SetNext(masksFilter);
   return sizeFilter;
 }
