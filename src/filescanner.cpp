@@ -32,13 +32,19 @@ PathGroupedBySize FileScanner::FindPath(const Paths& a_Includes)
         bfs::recursive_directory_iterator iter(incPath), end;
         while (iter != end) {
           ScanPath scanPath = std::make_pair(iter->path(), iter.level() );
-          if (bfs::is_directory(iter->path()) && !m_DirFilter->IsValid(scanPath))
-          {
+          if (bfs::is_directory(iter->path()) && !m_DirFilter->IsValid(scanPath)) {
             iter.no_push();            
           }
           else {
-            if ( bfs::is_regular_file(iter->path()) && m_FileFilter->IsValid(iter->path()) ) {
+            if ( bfs::is_regular_file(iter->path()) ) {
               auto path = iter->path();
+              auto status = bfs::symlink_status(iter->path());
+              if (status.type() == bfs::file_type::symlink_file) {                
+                auto realPath = bfs::read_symlink(iter->path());
+                auto parentPath = iter->path().parent_path();
+                path = bfs::canonical(realPath, parentPath);
+              }
+
               std::size_t szSize = bfs::file_size(path);
 
               auto& uniquepaths = resultPaths[szSize];
