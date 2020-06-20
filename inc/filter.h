@@ -5,14 +5,13 @@
 
 #include <memory>
 
-
 namespace Otus
 {
 
 class DirFilter
 {
 public:
-  virtual std::weak_ptr<DirFilter> SetNext(std::shared_ptr<DirFilter> a_dirFilter) = 0;
+  virtual std::shared_ptr<DirFilter>& SetNext(const std::shared_ptr<DirFilter>& a_dirFilter) = 0;
   virtual bool IsValid(const ScanPath& a_path) = 0;
 };
 
@@ -22,23 +21,23 @@ public:
   BaseDirFilter()
   { }
 
-  std::weak_ptr<DirFilter> SetNext(std::shared_ptr<DirFilter> a_dirFilter) override
+  std::shared_ptr<DirFilter>& SetNext(const std::shared_ptr<DirFilter>& a_dirFilter) override
   {
     this->nextDirFilter = a_dirFilter;
-    return a_dirFilter;
+    return nextDirFilter;
   }
 
   bool IsValid(const ScanPath& a_path) override
   {
-    if ( !nextDirFilter.expired() ) {
-      return nextDirFilter.lock()->IsValid(a_path);
+    if ( nextDirFilter ) {
+      return nextDirFilter->IsValid(a_path);
     }
 
     return true;
   }
 
 private:
-  std::weak_ptr<DirFilter> nextDirFilter;
+  std::shared_ptr<DirFilter> nextDirFilter;
 };
 
 class LevelDirFilter : public BaseDirFilter
@@ -96,7 +95,7 @@ private:
 class FileFilter
 {
 public:
-  virtual std::weak_ptr<FileFilter> SetNext(std::shared_ptr<FileFilter> a_dirFilter) = 0;
+  virtual std::shared_ptr<FileFilter>& SetNext(const std::shared_ptr<FileFilter>& a_dirFilter) = 0;
   virtual bool IsValid(const Path& a_path) = 0;
 };
 
@@ -106,23 +105,22 @@ public:
   BaseFileFilter()
   { }
 
-  std::weak_ptr<FileFilter> SetNext(std::shared_ptr<FileFilter> a_dirFilter) override
+  std::shared_ptr<FileFilter>& SetNext(const std::shared_ptr<FileFilter>& a_fileFilter) override
   {
-    this->nextFileFilter = a_dirFilter;
+    this->nextFileFilter = a_fileFilter;
     return nextFileFilter;
   }
 
   bool IsValid(const Path& a_path) override
   {
-    if ( !nextFileFilter.expired() ) {
-      return nextFileFilter.lock()->IsValid(a_path);
+    if ( nextFileFilter ) {
+      return nextFileFilter->IsValid(a_path);
     }
-
     return true;
   }
 
 private:
-  std::weak_ptr<FileFilter> nextFileFilter;
+  std::shared_ptr<FileFilter> nextFileFilter;
 };
 
 class SizeFileFilter : public BaseFileFilter
@@ -166,7 +164,6 @@ public:
         } 
       );
     }
-    
     return BaseFileFilter::IsValid(a_path);
   }
 

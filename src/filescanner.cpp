@@ -37,18 +37,19 @@ PathGroupedBySize FileScanner::FindPath(const Paths& a_Includes)
           }
           else {
             if ( bfs::is_regular_file(iter->path()) ) {
-              auto path = iter->path();
+              Path path = iter->path();
               auto status = bfs::symlink_status(iter->path());
               if (status.type() == bfs::file_type::symlink_file) {                
                 auto realPath = bfs::read_symlink(iter->path());
                 auto parentPath = iter->path().parent_path();
                 path = bfs::canonical(realPath, parentPath);
               }
-
-              std::size_t szSize = bfs::file_size(path);
-
-              auto& uniquepaths = resultPaths[szSize];
-              uniquepaths.insert(path);
+              
+              if (m_FileFilter->IsValid(path) ) {
+                std::size_t szSize = bfs::file_size(path);
+                auto& uniquepaths = resultPaths[szSize];
+                uniquepaths.insert(path);
+              }
             }
           }
   
@@ -82,25 +83,25 @@ void FileScanner::DeleteUniqPath(PathGroupedBySize& a_groupPath)
   }
 }
 
-std::shared_ptr<DirFilter> FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
+std::unique_ptr<DirFilter> FileScanner::CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes)
 {
   std::size_t szLevel = 0;
   if (a_szLevel) {
     szLevel = a_szLevel.get();
   }
-  auto levelFilter = std::make_shared<LevelDirFilter>(szLevel);
+  auto levelFilter = std::make_unique<LevelDirFilter>(szLevel);
   auto excludeFilter = std::make_shared<ExcludeDirFilter>(a_Excludes);
   levelFilter->SetNext(excludeFilter);
   return levelFilter;
 }
 
-std::shared_ptr<FileFilter> FileScanner::CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks)
+std::unique_ptr<FileFilter> FileScanner::CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks)
 {
   std::size_t szMinSize = 1;
   if (a_szMinSize) {
     szMinSize = a_szMinSize.get();
   }
-  auto sizeFilter = std::make_shared<SizeFileFilter>(szMinSize);
+  auto sizeFilter = std::make_unique<SizeFileFilter>(szMinSize);
   auto masksFilter = std::make_shared<MasksFileFilter>(a_strMasks);
   sizeFilter->SetNext(masksFilter);
   return sizeFilter;

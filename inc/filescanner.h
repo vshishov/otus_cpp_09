@@ -19,8 +19,8 @@ public:
   PathGroupedBySize Scan(const Paths& a_Includes);
 
 private:
-  static std::shared_ptr<DirFilter> CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes);
-  static std::shared_ptr<FileFilter> CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks);
+  static std::unique_ptr<DirFilter> CreateDirFilter(boost::optional<std::size_t>& a_szLevel, const Paths& a_Excludes);
+  static std::unique_ptr<FileFilter> CreateFileFilter(boost::optional<std::size_t>& a_szMinSize, const std::vector<std::string>& a_strMasks);
 
   PathGroupedBySize FindPath(const Paths& a_Includes);
   void DeleteUniqPath(PathGroupedBySize& a_groupPath);
