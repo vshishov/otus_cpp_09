@@ -9,6 +9,7 @@ addons:
     - libboost-filesystem-dev
     - libboost-regex-dev
     - libgtest-dev
+    - google-mock
     - doxygen
     - graphviz
 
