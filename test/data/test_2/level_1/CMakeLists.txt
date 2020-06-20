@@ -68,8 +68,6 @@ if(EXISTS "${GTEST_SRCDIR}/CMakeLists.txt")
 
   enable_testing()
   add_test(${TEST_NAME} ${TEST_NAME})
-
-  file(COPY ${CMAKE_SOURCE_DIR}/test/data DESTINATION ${CMAKE_BINARY_DIR})
 else()
   message(
     WARNING
