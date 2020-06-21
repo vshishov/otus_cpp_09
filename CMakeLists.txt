@@ -50,6 +50,7 @@ target_link_libraries(${EXEC_NAME} PRIVATE
 )
 
 if(EXISTS "${GTEST_SRCDIR}/CMakeLists.txt")
+message(${GTEST_SRCDIR})
   add_subdirectory(${GTEST_SRCDIR}/ ${CMAKE_BINARY_DIR}/gtest/ EXCLUDE_FROM_ALL)
 
   add_executable(${TEST_NAME}

@@ -49,17 +49,17 @@ protected:
 protected:
 };
 
-TEST_F(Bayan_Test, Test_1_Simple) {   
-  auto result = Run({"test_bayan", "-idata/test_1/"});
-  ASSERT_EQ(result.size(), (std::size_t)2);
-}
-
 // TEST_F(Bayan_Test, Test_1_Simple) {   
 //   auto result = Run({"test_bayan", "-idata/test_1/"});
 //   ASSERT_EQ(result.size(), (std::size_t)2);
-//   ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
-//   ASSERT_THAT(result[1], ElementsAre( StrEq("file2.txt"), StrEq("file1.txt") ));
 // }
+
+TEST_F(Bayan_Test, Test_1_Simple) {   
+  auto result = Run({"test_bayan", "-idata/test_1/"});
+  ASSERT_EQ(result.size(), (std::size_t)2);
+  ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
+  ASSERT_THAT(result[1], ElementsAre( StrEq("file2.txt"), StrEq("file1.txt") ));
+}
 
 // TEST_F(Bayan_Test, Test_1_Masks) {   
 //   auto result = Run({"test_bayan", "-idata/test_1/", "-m*.cpp"});
