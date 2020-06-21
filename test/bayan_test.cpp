@@ -79,8 +79,8 @@ TEST_F(Bayan_Test, Test_2_Level) {
   // ASSERT_THAT(result[1], ElementsAre( StrEq("just_single_file.doc"), StrEq("just_single_file.doc")));
 }
 
-// TEST_F(Bayan_Test, Test_2_Exclude) {   
-//   auto result = Run({"test_bayan", "-idata/test_2/", "-edata/test_2/level_1/", "-l1" });
-//   ASSERT_EQ(result.size(), (std::size_t)1);
-//   ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
-// }
+TEST_F(Bayan_Test, Test_2_Exclude) {   
+  auto result = Run({"test_bayan", "-idata/test_2/", "-edata/test_2/level_1/", "-l1" });
+  ASSERT_EQ(result.size(), (std::size_t)1);
+  // ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
+}
