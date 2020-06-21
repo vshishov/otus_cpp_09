@@ -66,11 +66,11 @@ TEST_F(Bayan_Test, Test_1_Masks) {
   ASSERT_THAT(result[0], ElementsAre( StrEq("file2.txt"), StrEq("file1.txt") ));
 }
 
-// TEST_F(Bayan_Test, Test_1_Size) {   
-//   auto result = Run({"test_bayan", "-idata/test_1/", "-s100"});
-//   ASSERT_EQ(result.size(), (std::size_t)1);
-//   ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
-// }
+TEST_F(Bayan_Test, Test_1_Size) {   
+  auto result = Run({"test_bayan", "-idata/test_1/", "-s100"});
+  ASSERT_EQ(result.size(), (std::size_t)1);
+  ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
+}
 
 // TEST_F(Bayan_Test, Test_2_Level) {   
 //   auto result = Run({"test_bayan", "-idata/test_2", "-l1"});
