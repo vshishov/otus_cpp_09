@@ -52,8 +52,8 @@ protected:
 TEST_F(Bayan_Test, Test_1_Simple) {   
   auto result = Run({"test_bayan", "-idata/test_1/"});
   ASSERT_EQ(result.size(), (std::size_t)2);
-  ASSERT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
-  ASSERT_THAT(result[1], ElementsAre( StrEq("file2.txt"), StrEq("file1.txt") ));
+  EXPECT_THAT(result[1], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
+  EXPECT_THAT(result[0], ElementsAre( StrEq("file2.txt"), StrEq("file1.txt") ));
 }
 
 TEST_F(Bayan_Test, Test_1_Masks) {   
@@ -75,8 +75,8 @@ TEST_F(Bayan_Test, Test_1_Size) {
 TEST_F(Bayan_Test, Test_2_Level) {   
   auto result = Run({"test_bayan", "-idata/test_2", "-l1"});
   ASSERT_EQ(result.size(), (std::size_t)2);
-  EXPECT_THAT(result[1], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
-  EXPECT_THAT(result[0], ElementsAre( StrEq("just_single_file_copy.doc"), StrEq("just_single_file.doc")));
+  EXPECT_THAT(result[0], ElementsAre( StrEq("hello_copy.cpp"), StrEq("hello.cpp") ));
+  EXPECT_THAT(result[1], ElementsAre( StrEq("just_single_file_copy.doc"), StrEq("just_single_file.doc")));
 }
 
 TEST_F(Bayan_Test, Test_2_Exclude) {   

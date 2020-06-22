@@ -26,8 +26,8 @@ private:
   void DeleteUniqPath(PathGroupedBySize& a_groupPath);
 
 private:  
-  std::shared_ptr<DirFilter> m_DirFilter;
-  std::shared_ptr<FileFilter> m_FileFilter;
+  std::unique_ptr<DirFilter> m_DirFilter;
+  std::unique_ptr<FileFilter> m_FileFilter;
 };
 
 } // Otus::
