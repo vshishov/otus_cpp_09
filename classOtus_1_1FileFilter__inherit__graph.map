@@ -1,0 +1,5 @@
+<map id="Otus::FileFilter" name="Otus::FileFilter">
+<area shape="rect" id="node2" href="$classOtus_1_1BaseFileFilter.html" title="Otus::BaseFileFilter" alt="" coords="95,80,241,107"/>
+<area shape="rect" id="node3" href="$classOtus_1_1MasksFileFilter.html" title="Otus::MasksFileFilter" alt="" coords="5,155,160,181"/>
+<area shape="rect" id="node4" href="$classOtus_1_1SizeFileFilter.html" title="Otus::SizeFileFilter" alt="" coords="184,155,325,181"/>
+</map>
