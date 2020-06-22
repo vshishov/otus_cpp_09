@@ -8,6 +8,8 @@ endif()
 
 project(bayan VERSION ${VERSION})
 
+set(CMAKE_CXX_STANDARD 11)
+
 find_package( Boost COMPONENTS program_options filesystem regex REQUIRED )
 include_directories( ${Boost_INCLUDE_DIR} )
 
